@@ -531,3 +531,35 @@ select {
   text-align: center;
   margin-top: 10px;
 }
+.brief-preview {
+  background: var(--bg2);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text);
+  font-family: monospace;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
+  max-height: 220px;
+  overflow-y: auto;
+}
+.copy-btn {
+  width: 100%;
+  background: var(--bg2);
+  border: 1.5px solid var(--bg3);
+  border-radius: 980px;
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 12px 28px;
+  cursor: pointer;
+  font-family: inherit;
+  margin-bottom: 10px;
+  transition: all 0.2s;
+}
+.copy-btn:hover {
+  background: var(--bg3);
+}

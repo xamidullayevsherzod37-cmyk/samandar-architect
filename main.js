@@ -15,7 +15,7 @@ const T = {
     hint: "Нажмите для выбора · Pinterest откроет примеры",
     pin: "Примеры →",
     sel: "Выберите",
-    header: "📋 БРИФ DESIGN",
+    header: "📋 SAMANDAR ARCHITECT",
     steps: ["Знакомство", "Объект", "Стиль", "Пожелания", "Бюджет"],
     subtitles: [
       "Расскажите немного о себе",
@@ -36,7 +36,7 @@ const T = {
     hint: "Tanlash uchun bosing · Pinterest misollarni ochadi",
     pin: "Misollar →",
     sel: "Tanlang",
-    header: "📋 DESIGN BRIEF",
+    header: "📋 SAMANDAR ARCHITECT",
     steps: ["Tanishuv", "Ob'ekt", "Uslub", "Istaklar", "Byudjet"],
     subtitles: [
       "O'zingiz haqingizda",
@@ -560,9 +560,77 @@ function buildText() {
 }
 
 function sendTG() {
-  // ⚡️ To'g'ridan-to'g'ri faqat sizning profilingiz ochiladi va ixcham matn pastga tushadi
-  const tgUrl = `https://t.me/${TG}?text=${encodeURIComponent(buildText())}`;
-  window.open(tgUrl, "_blank");
+  const text = buildText();
+  const encoded = encodeURIComponent(text);
+
+  // Clipboard ga ham saqlab qo'yamiz (zapas)
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).catch(() => {});
+  } else {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+      document.execCommand("copy");
+    } catch (e) {}
+    document.body.removeChild(ta);
+  }
+
+  // tg:// deep link — Telegram ilovasiga matn bilan to'g'ridan kiradi
+  const deepLink = "tg://resolve?domain=" + TG + "&text=" + encoded;
+  const webLink = "https://t.me/" + TG + "?text=" + encoded;
+
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  if (isMobile) {
+    window.location.href = deepLink;
+    setTimeout(() => {
+      window.open(webLink, "_blank");
+    }, 1500);
+  } else {
+    window.open(webLink, "_blank");
+  }
+}
+
+function copyText() {
+  const text = buildText();
+  const btn = document.getElementById("copyBtn");
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        if (btn) {
+          btn.textContent = "✅ Скопировано!";
+          setTimeout(() => {
+            btn.textContent = "📋 Скопировать текст";
+          }, 2000);
+        }
+      })
+      .catch(() => fallbackCopy(text, btn));
+  } else {
+    fallbackCopy(text, btn);
+  }
+}
+
+function fallbackCopy(text, btn) {
+  const ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.position = "fixed";
+  ta.style.opacity = "0";
+  document.body.appendChild(ta);
+  ta.select();
+  try {
+    document.execCommand("copy");
+    if (btn) {
+      btn.textContent = "✅ Скопировано!";
+      setTimeout(() => {
+        btn.textContent = "📋 Скопировать текст";
+      }, 2000);
+    }
+  } catch (e) {}
+  document.body.removeChild(ta);
 }
 
 function submitForm() {
@@ -581,6 +649,8 @@ function submitForm() {
   ).parentElement.parentElement.style.opacity = "0";
   document.querySelector(".topbar").style.display = "none";
 
+  const briefText = buildText();
+
   document.getElementById("root").innerHTML = `
     <div class="done-wrap">
       <div class="done-top">
@@ -590,11 +660,13 @@ function submitForm() {
       </div>
       <div class="summary-box">${rows}</div>
       <div class="done-footer">
+        <div class="brief-preview">${briefText.replace(/\n/g, "<br>")}</div>
+        <button id="copyBtn" class="copy-btn" onclick="copyText()">📋 ${lang === "uz" ? "Nusxa olish" : "Скопировать текст"}</button>
         <button class="tg-btn" onclick="sendTG()">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.93 6.77l-1.9 8.96c-.14.62-.5.77-.99.48l-2.75-2.03-1.33 1.28c-.15.15-.27.27-.55.27l.2-2.77 5.02-4.54c.22-.19-.05-.3-.33-.11l-6.21 3.91-2.67-.84c-.58-.18-.59-.58.12-.86l10.44-4.02c.48-.18.9.11.75.27z"/></svg>
           ${L.tg_btn}
         </button>
-        <p class="tg-note">${L.tg_note}</p>
+        <p class="tg-note">${lang === "uz" ? "Matn nusxa olindi — chatga joylashtiring va yuboring" : "Текст скопирован — вставьте в чат и отправьте"}</p>
       </div>
     </div>`;
 }
