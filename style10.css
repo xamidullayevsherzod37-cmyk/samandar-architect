@@ -1,0 +1,513 @@
+:root {
+  /* Editorial Mukammal Oq Palitrasi */
+  --bg: #ffffff; /* Mutloq toza oq fon */
+  --bg-card: #ffffff;
+  --bg-input: #f7f7f9; /* Nafis va juda mayin kulrang */
+  --text: #000000; /* Mukammal qora kontrast */
+  --text2: #6e6e73; /* Apple uslubidagi passiv matn rangi */
+  --text3: #aeae Hellen; /* Eng och matnlar va chiziqlar */
+  --accent: #000000; /* Minimalizmda asosiy urg'u ham qora rangda bo'ladi! */
+  --accent-light: #f2f2f7;
+  --success: #1d1d1f;
+
+  /* Soyalar deyarli yo'q, faqat element ajralib turishi uchun juda nozik chiziq */
+  --border: 1px solid #e5e5ea;
+  --radius: 0px; /* Diqqat! Burchaklarni mutloq to'g'ri (0px) yoki judayam kichik qilish jurnal uslubini beradi */
+  --radius-sm: 0px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial,
+    sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 24px 100px;
+  letter-spacing: -0.01em; /* Matnlarni ixcham va chiroyli ko'rsatadi */
+}
+
+/* TOP BAR — JURNAL SARKALVHASI USLUBIDA */
+.topbar {
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32px 0 16px;
+  background: var(--bg);
+  border-bottom: 2px solid var(--text); /* Qalin qora chiziq premium uslub beradi */
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.brand {
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text);
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.step-pill {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.lang-switch {
+  display: flex;
+  gap: 4px;
+}
+
+.lang-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text2);
+  padding: 2px 6px;
+  font-family: inherit;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+}
+
+.lang-btn.active {
+  color: var(--text);
+  font-weight: 800;
+  text-decoration: underline; /* Zamonaviy anti-vintaj uslub */
+  text-underline-offset: 4px;
+}
+
+/* PROGRESS BAR — TOZA CHIZIQ */
+.progress-wrap {
+  width: 100%;
+  max-width: 640px;
+  margin-bottom: 48px;
+}
+
+.progress-track {
+  height: 2px; /* Juda ingichka va chiroyli chiziq */
+  background: #e5e5ea;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--text);
+  transition: width 0.4s ease;
+}
+
+.step-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.step-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text2);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.step-label.active {
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* MAIN CARD — CHEGARALAShTIRILMAGAN ERKIN USLUB */
+.card {
+  width: 100%;
+  max-width: 640px;
+  background: var(--bg-card);
+  overflow: hidden;
+}
+
+.card-hero {
+  padding: 0 0 24px 0;
+  border-bottom: 1px solid #e5e5ea;
+}
+
+.card-step-tag {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text2);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.card-title {
+  font-size: 32px; /* Katta jozibali sarlavha */
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+  margin-top: 4px;
+}
+
+/* FIELDS & INPUTS */
+.questions {
+  padding: 32px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.field-label {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text);
+}
+
+/* Input dizayni: To'liq qutilardan voz kechib, faqat pastki chiziqli (Minimalist) qilish ham mumkin */
+input,
+textarea,
+select {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid transparent;
+  border-bottom: 2px solid #e5e5ea; /* Faqat pastki qismiga urg'u berilgan */
+  color: var(--text);
+  padding: 16px 12px;
+  font-size: 16px;
+  font-family: inherit;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+input::placeholder {
+  color: #999999;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  background: #ffffff;
+  border-bottom-color: var(
+    --text
+  ); /* Fokus bo'lganda qalin qora chiziqqa aylanadi */
+}
+
+/* CHIPS — TOZA TO'RTBURCHAKLAR */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  border: 1px solid #e5e5ea;
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  background: #ffffff;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chip:hover {
+  border-color: var(--text);
+}
+
+.chip.active {
+  background: var(--text);
+  color: #ffffff;
+  border-color: var(--text);
+}
+
+/* GRIDS */
+.style-grid,
+.palette-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.style-card,
+.palette-card {
+  border: 1px solid #e5e5ea;
+  background: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.style-card:hover,
+.palette-card:hover {
+  border-color: var(--text);
+}
+
+.style-card.active,
+.palette-card.active {
+  border: 2px solid var(--text);
+}
+
+.style-card-top {
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  background: var(--bg-input);
+}
+
+.style-card-body {
+  padding: 16px;
+}
+
+.style-card-name,
+.palette-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.style-card-desc {
+  font-size: 12px;
+  color: var(--text2);
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+.pin-wrap {
+  padding: 0 16px 16px;
+}
+
+.pin-btn {
+  width: 100%;
+  background: transparent;
+  border: 1px solid #e5e5ea;
+  color: var(--text2);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 8px 0;
+  cursor: pointer;
+}
+
+.pin-btn:hover {
+  border-color: var(--text);
+  color: var(--text);
+}
+
+/* PALETTE SWATCHES */
+.palette-card {
+  padding: 16px;
+}
+
+.swatches {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 12px;
+}
+
+.swatch {
+  flex: 1;
+  height: 32px;
+}
+
+/* NAVIGATION */
+.nav {
+  padding: 32px 0 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #e5e5ea;
+}
+
+.btn-back {
+  background: transparent;
+  border: none;
+  color: var(--text2);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 12px 0;
+  cursor: pointer;
+}
+
+.btn-back:hover {
+  color: var(--text);
+}
+
+.btn-next {
+  background: var(--text); /* Mutloq qora tugma */
+  border: none;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 14px 32px;
+  cursor: pointer;
+  margin-left: auto;
+  transition: background-color 0.2s ease;
+}
+
+.btn-next:hover {
+  background: #222222;
+}
+
+.btn-next:disabled {
+  background: #f2f2f7;
+  color: #a1a1a6;
+  cursor: not-allowed;
+}
+
+/* DONE SCREEN */
+.done-wrap {
+  width: 100%;
+  max-width: 640px;
+  background: var(--bg-card);
+}
+
+.done-top {
+  padding: 16px 0 32px 0;
+  text-align: left; /* Jurnal maqolasi kabi chap qismga tekislangan */
+  border-bottom: 1px solid #e5e5ea;
+}
+
+.done-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.done-title {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.done-sub {
+  font-size: 15px;
+  color: var(--text2);
+  margin-top: 8px;
+}
+
+.summary-box {
+  padding: 32px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-bottom: 1px solid #e5e5ea;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.summary-label {
+  font-size: 14px;
+  color: var(--text2);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.summary-val {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.done-footer {
+  padding: 32px 0;
+}
+
+.brief-preview {
+  background: var(--bg-input);
+  padding: 24px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text);
+  margin-bottom: 32px;
+  border-left: 3px solid var(--text); /* Chap tomondagi qalin urg'u chizig'i */
+}
+
+.copy-btn {
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--text);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 16px;
+  cursor: pointer;
+  margin-bottom: 12px;
+  transition: all 0.2s;
+}
+
+.copy-btn:hover {
+  background: var(--bg-input);
+}
+
+.tg-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--text);
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 18px;
+  cursor: pointer;
+}
+
+.tg-btn:hover {
+  background: #222222;
+}
+
+.tg-note {
+  font-size: 12px;
+  color: var(--text2);
+  text-align: center;
+  margin-top: 16px;
+}
+
+/* SMARTPHONE RESPONSIVE */
+@media (max-width: 480px) {
+  .card-title {
+    font-size: 26px;
+  }
+  .done-title {
+    font-size: 28px;
+  }
+}

@@ -1,0 +1,619 @@
+:root {
+  /* Sof va mukammal neominimalizm asosi */
+  --bg: #edf1f5; /* Bir oz havorang-kulrang aralashgan toza fon */
+  --bg-card: #edf1f5; /* Karta ham fon bilan bir xil rangda bo'ladi */
+  --text: #2a313c; /* Chuqur va muloyim to'q rang */
+  --text2: #7c889a; /* Ikkinchi darajali ma'lumotlar */
+  --text3: #a6b4c9; /* Passiv matnlar */
+  --accent: #4361ee; /* Nafis va yorqin zamonaviy ko'k */
+  --accent-light: rgba(67, 97, 238, 0.1);
+
+  /* Kuchli 3D effekt beruvchi qo'shaloq soyalar (Neumorphic Soft Shadows) */
+  --shadow-out: 6px 6px 16px #cfd7df, -6px -6px 16px #ffffff;
+  --shadow-in: inset 4px 4px 8px #cfd7df, inset -4px -4px 8px #ffffff;
+  --shadow-btn: 4px 4px 10px #cfd7df, -4px -4px 10px #ffffff;
+
+  --radius: 28px; /* Yana ham yumshoqroq va jozibali burchaklar */
+  --radius-sm: 16px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 16px 80px;
+  opacity: 0;
+  animation: softReveal 0.5s ease-out forwards;
+}
+
+@keyframes softReveal {
+  to {
+    opacity: 1;
+  }
+}
+
+/* TOP BAR — BO'RTIB CHIQQAN MINIMAL PANEL */
+.topbar {
+  width: 100%;
+  max-width: 580px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  /* position: sticky;
+  top: 16px; */
+  z-index: 100;
+  background: var(--bg-card);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-out); /* Eksklyuziv 3D havoda turish effekti */
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.brand {
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.step-pill {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text2);
+  background: var(--bg);
+  box-shadow: var(--shadow-in); /* Ichkariga botgan pill */
+  padding: 5px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.lang-switch {
+  display: flex;
+  background: var(--bg);
+  box-shadow: var(--shadow-in);
+  border-radius: 20px;
+  padding: 3px;
+}
+
+.lang-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text2);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-family: inherit;
+  transition: all 0.25s ease;
+}
+
+.lang-btn.active {
+  background: var(--bg-card);
+  color: var(--accent);
+  box-shadow: var(--shadow-btn); /* Bosilganda bo'rtib chiqishi */
+}
+
+/* PROGRESS BAR */
+.progress-wrap {
+  width: 100%;
+  max-width: 580px;
+  margin-top: 16px;
+  margin-bottom: 32px;
+  padding: 0 4px;
+}
+
+.progress-track {
+  height: 6px;
+  background: var(--bg);
+  box-shadow: var(--shadow-in); /* Ichkariga chuqurlashgan yo'lakcha */
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 10px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.step-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.step-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text3);
+  transition: color 0.3s ease;
+}
+
+.step-label.active {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.step-label.done {
+  color: var(--accent);
+}
+
+/* MAIN CARD — NEOMORPHIC SURFACE */
+.card {
+  width: 100%;
+  max-width: 580px;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-out); /* Tekislikdan yumshoq ko'tarilgan karta */
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  animation: cardSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes cardSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card-hero {
+  padding: 44px 44px 16px;
+}
+
+.card-step-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.card-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+/* FIELDS & INPUTS */
+.questions {
+  padding: 16px 44px 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.field-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text2);
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  background: var(--bg);
+  border: none;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-in); /* Input yuzadan ichkariga botgan shaklda */
+  color: var(--text);
+  padding: 16px 18px;
+  font-size: 15px;
+  font-family: inherit;
+  outline: none;
+  transition: box-shadow 0.25s ease;
+}
+
+input::placeholder {
+  color: var(--text3);
+}
+
+/* Fokus bo'lganda silliq yorishish effekti */
+input:focus,
+textarea:focus,
+select:focus {
+  box-shadow:
+    inset 2px 2px 5px #cfd7df,
+    inset -2px -2px 5px #ffffff,
+    0 0 0 2px var(--accent-light);
+}
+
+/* CHIPS */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.chip {
+  border: none;
+  border-radius: 24px;
+  color: var(--text);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-btn);
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chip:hover {
+  transform: translateY(-1px);
+}
+
+.chip.active {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 3px 3px 10px rgba(67, 97, 238, 0.3); /* Aktiv holatda ko'k nurlanish */
+}
+
+/* GRIDS */
+.style-grid,
+.palette-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.style-card,
+.palette-card {
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-btn);
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.25s ease;
+}
+
+.style-card:hover,
+.palette-card:hover {
+  transform: translateY(-2px);
+}
+
+.style-card.active,
+.palette-card.active {
+  box-shadow: var(
+    --shadow-in
+  ); /* Aktiv element ichiga botib kiradi (fizik bosilish effekti) */
+  border: 1px solid rgba(67, 97, 238, 0.2);
+}
+
+.style-card-top {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  background: rgba(0, 0, 0, 0.01);
+}
+
+.style-card-body {
+  padding: 16px;
+}
+
+.style-card-name,
+.palette-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.style-card-name .check,
+.palette-name .check {
+  color: var(--accent);
+}
+
+.style-card-desc {
+  font-size: 11px;
+  color: var(--text2);
+  margin-top: 4px;
+}
+
+.pin-wrap {
+  padding: 0 16px 16px;
+}
+
+.pin-btn {
+  width: 100%;
+  background: var(--bg);
+  box-shadow: var(--shadow-in);
+  border: none;
+  border-radius: 10px;
+  color: var(--text2);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 8px 0;
+  cursor: pointer;
+}
+
+/* PALETTE SWATCHES */
+.palette-card {
+  padding: 16px;
+}
+
+.swatches {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.swatch {
+  flex: 1;
+  height: 28px;
+}
+
+/* NAVIGATION */
+.nav {
+  padding: 24px 44px 44px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+.btn-back {
+  background: var(--bg-card);
+  box-shadow: var(--shadow-btn);
+  border: none;
+  color: var(--text2);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 12px 22px;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s ease;
+}
+
+.btn-back:hover {
+  color: var(--text);
+  box-shadow: var(--shadow-in);
+}
+
+.btn-next {
+  background: var(--accent);
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 12px 32px;
+  cursor: pointer;
+  margin-left: auto;
+  border-radius: 26px;
+  box-shadow: 3px 3px 10px rgba(67, 97, 238, 0.2);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-next:hover {
+  transform: translateY(-1px);
+  box-shadow: 4px 4px 14px rgba(67, 97, 238, 0.35);
+}
+
+.btn-next:active {
+  transform: translateY(1px);
+}
+
+.btn-next:disabled {
+  background: var(--bg);
+  color: var(--text3);
+  box-shadow: var(--shadow-in);
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* DONE SCREEN */
+.done-wrap {
+  width: 100%;
+  max-width: 580px;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-out);
+  overflow: hidden;
+  animation: cardSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.done-top {
+  padding: 48px 44px 24px;
+  text-align: center;
+}
+
+.done-icon {
+  width: 56px;
+  height: 56px;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-btn);
+  color: #2da44e; /* Yashil muvaffaqiyat belgisi */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin: 0 auto 20px;
+}
+
+.done-title {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.done-sub {
+  font-size: 14px;
+  color: var(--text2);
+  margin-top: 8px;
+}
+
+.summary-box {
+  padding: 24px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: var(--bg);
+  box-shadow: var(--shadow-in);
+  margin: 0 44px;
+  border-radius: var(--radius-sm);
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.summary-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.summary-label {
+  font-size: 13px;
+  color: var(--text2);
+}
+
+.summary-val {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.done-footer {
+  padding: 36px 44px 44px;
+}
+
+.brief-preview {
+  background: var(--bg);
+  box-shadow: var(--shadow-in);
+  border-radius: var(--radius-sm);
+  padding: 18px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text2);
+  margin-bottom: 24px;
+}
+
+.copy-btn {
+  width: 100%;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-btn);
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 14px;
+  cursor: pointer;
+  margin-bottom: 16px;
+  transition: all 0.2s;
+}
+
+.copy-btn:hover {
+  box-shadow: var(--shadow-in);
+}
+
+.tg-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--accent);
+  border: none;
+  border-radius: 26px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 16px;
+  cursor: pointer;
+  box-shadow: 3px 3px 12px rgba(67, 97, 238, 0.3);
+  transition: all 0.25s ease;
+}
+
+.tg-btn:hover {
+  background: #314fd1;
+  box-shadow: 4px 4px 16px rgba(67, 97, 238, 0.45);
+}
+
+.tg-note {
+  font-size: 11px;
+  color: var(--text3);
+  text-align: center;
+  margin-top: 14px;
+}
+
+/* SMARTPHONE RESPONSIVE */
+@media (max-width: 480px) {
+  .brand {
+    font-size: 12px;
+  }
+  .topbar {
+    padding: 14px 16px;
+    top: 10px;
+  }
+  .card-hero {
+    padding: 36px 24px 12px;
+  }
+  .questions {
+    padding: 12px 24px 36px;
+    gap: 22px;
+  }
+  .nav {
+    padding: 16px 24px 36px;
+  }
+  .summary-box {
+    margin: 0 24px;
+    padding: 16px 18px;
+  }
+  .done-top {
+    padding: 36px 24px 20px;
+  }
+  .done-footer {
+    padding: 28px 24px 36px;
+  }
+}

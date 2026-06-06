@@ -1,0 +1,630 @@
+:root {
+  --bg: #ffffff;
+  --bg2: #f5f5f7; /* Apple'ning rasmiy och kulrang foni */
+  --bg3: #e8e8ed;
+  --text: #1d1d1f; /* Apple sof qora ishlatmaydi, to'q kulrang */
+  --text2: #6e6e73; /* Subtitle va yordamchi matnlar uchun */
+  --text3: #86868b;
+  --accent: #0071e3; /* Apple Blue rang kodi */
+  --accent-light: #f2f7fd;
+  --border: rgba(0, 0, 0, 0.06);
+  --border-light: rgba(0, 0, 0, 0.04);
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.08);
+  --radius: 20px;
+  --radius-sm: 12px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+    "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: var(--bg2);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px 100px;
+}
+
+/* TOP BAR */
+.topbar {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 0 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(245, 245, 247, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.brand {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text2);
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.step-pill {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text2);
+  background: rgba(0, 0, 0, 0.04);
+  padding: 5px 12px;
+  border-radius: 20px;
+}
+
+.lang-switch {
+  display: flex;
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 20px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.lang-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text2);
+  padding: 4px 12px;
+  border-radius: 16px;
+  transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+  font-family: inherit;
+}
+
+.lang-btn.active {
+  background: #fff;
+  color: var(--text);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* PROGRESS BAR */
+.progress-wrap {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 32px;
+}
+
+.progress-track {
+  height: 4px;
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 4px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.step-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding: 0 4px;
+}
+
+.step-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text3);
+  letter-spacing: 0.02em;
+  transition: color 0.3s ease;
+}
+
+.step-label.active {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.step-label.done {
+  color: var(--accent);
+}
+
+/* CARD (APPLE INTRO/OUTRO) */
+.card {
+  width: 100%;
+  max-width: 600px;
+  background: var(--bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition:
+    transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+    opacity 0.4s ease;
+  animation: cardIn 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.card-hero {
+  padding: 40px 40px 24px;
+  text-align: center; /* Apple onboarding markazlashgan bo'ladi */
+}
+
+.card-step-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text2);
+  background: var(--bg2);
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+  border: 1px solid var(--border-light);
+}
+
+.card-title {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--text);
+  line-height: 1.15;
+}
+
+/* INPUTS & FIELDS */
+.questions {
+  padding: 16px 40px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text2);
+  padding-left: 2px;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  background: var(--bg2);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  padding: 14px 16px;
+  font-size: 16px;
+  font-family: inherit;
+  outline: none;
+  transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+input:hover,
+textarea:hover,
+select:hover {
+  background: #f0f0f3;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  background: #fff;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.15);
+}
+
+/* CHIPS (BUTTON CHIPS) */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+  color: var(--text);
+  background: #fff;
+  padding: 9px 18px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+  font-family: inherit;
+}
+
+.chip:hover {
+  background: var(--bg2);
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+.chip.active {
+  background: var(--text); /* Apple uslubida aktiv chip qora bo'ladi */
+  border-color: var(--text);
+  color: #fff;
+}
+
+/* CARDS (STYLE & PALETTE GRIDS) */
+.style-grid,
+.palette-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.style-card,
+.palette-card {
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #fff;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+  position: relative;
+}
+
+.style-card:hover,
+.palette-card:hover {
+  border-color: rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+}
+
+.style-card.active,
+.palette-card.active {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.15);
+}
+
+.style-card-top {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  background: var(--bg2);
+  transition: background 0.2s ease;
+}
+
+.style-card.active .style-card-top {
+  background: var(--accent-light);
+}
+
+.style-card-body {
+  padding: 12px 14px 10px;
+}
+
+.style-card-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.style-card-name .check,
+.palette-name .check {
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.style-card-desc {
+  font-size: 12px;
+  color: var(--text2);
+  margin-top: 2px;
+}
+
+.pin-wrap {
+  padding: 0 14px 12px;
+}
+
+.pin-btn {
+  width: 100%;
+  background: var(--bg2);
+  border: none;
+  border-radius: 8px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 0;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s;
+}
+
+.pin-btn:hover {
+  background: var(--accent-light);
+}
+
+/* PALETTE SWATCHES */
+.palette-card {
+  padding: 14px;
+}
+
+.swatches {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.swatch {
+  flex: 1;
+  height: 32px;
+}
+
+.palette-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* HINT TEXT */
+.hint {
+  font-size: 12px;
+  color: var(--text3);
+  margin-bottom: 8px;
+  padding-left: 2px;
+}
+
+/* BUTTONS NAVIGATION */
+.nav {
+  padding: 24px 40px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-back {
+  background: transparent;
+  border: none;
+  color: var(--accent);
+  font-size: 16px;
+  font-weight: 500;
+  padding: 12px 4px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 0.2s;
+}
+
+.btn-back:hover {
+  opacity: 0.8;
+}
+
+.btn-next {
+  background: var(--accent);
+  border: none;
+  border-radius: 980px; /* Apple uslubidagi to'liq dumaloq tugma */
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 12px 32px;
+  cursor: pointer;
+  font-family: inherit;
+  margin-left: auto;
+  transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.btn-next:hover {
+  background: #0077ed;
+}
+
+.btn-next:active {
+  transform: scale(0.97);
+}
+
+.btn-next:disabled {
+  background: #e8e8ed;
+  color: #999999;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* DONE / SUMMARY PREVIEW PAGE */
+.done-wrap {
+  width: 100%;
+  max-width: 600px;
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  animation: cardIn 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.done-top {
+  padding: 48px 40px 32px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.done-icon {
+  width: 56px;
+  height: 56px;
+  background: #e6f7ed;
+  color: #34c759; /* Apple yashil rangi */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin: 0 auto 24px;
+}
+
+.done-title {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin-bottom: 8px;
+}
+
+.done-sub {
+  font-size: 16px;
+  color: var(--text2);
+}
+
+.summary-box {
+  background: #fff;
+  padding: 24px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between; /* Apple list ko'rinishi chap va o'ng taraflama */
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.summary-row:last-child {
+  border-bottom: none;
+}
+
+.summary-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text2);
+}
+
+.summary-val {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  text-align: right;
+}
+
+.done-footer {
+  padding: 12px 40px 40px;
+}
+
+.brief-preview {
+  background: var(--bg2);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text);
+  font-family: -apple-system, system-ui, sans-serif;
+  white-space: pre-wrap;
+  margin-bottom: 20px;
+  border: 1px solid var(--border);
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.copy-btn {
+  width: 100%;
+  background: var(--bg2);
+  border: none;
+  border-radius: 980px;
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 14px 28px;
+  cursor: pointer;
+  font-family: inherit;
+  margin-bottom: 12px;
+  transition: background 0.2s;
+}
+
+.copy-btn:hover {
+  background: var(--bg3);
+}
+
+.tg-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #0071e3; /* Telegram knopkasini ham Apple Blue qildik, shunda brending buzilmaydi */
+  border: none;
+  border-radius: 980px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  padding: 15px 28px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.tg-btn:hover {
+  background: #0077ed;
+}
+
+.tg-note {
+  font-size: 12px;
+  color: var(--text3);
+  text-align: center;
+  margin-top: 12px;
+}
+
+/* Skrollbarni chiroyli (Apple uslubida) qilish */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
