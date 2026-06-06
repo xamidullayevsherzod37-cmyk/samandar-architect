@@ -10,12 +10,12 @@ const T = {
     send: "Отправить бриф",
     done_title: "Готово!",
     done_sub: "Отправьте бриф дизайнеру",
-    tg_btn: "Отправить в Telegram",
-    tg_note: "Откроется Telegram — нажмите «Отправить»",
+    tg_btn: "Открыть чат с дизайнером",
+    tg_note: "Вставьте текст в чат и нажмите отправить",
     hint: "Нажмите для выбора · Pinterest откроет примеры",
     pin: "Примеры →",
     sel: "Выберите",
-    header: "📋 БРИФ",
+    header: "📋 БРИФ DESIGN",
     steps: ["Знакомство", "Объект", "Стиль", "Пожелания", "Бюджет"],
     subtitles: [
       "Расскажите немного о себе",
@@ -31,12 +31,12 @@ const T = {
     send: "Briefni yuborish",
     done_title: "Tayyor!",
     done_sub: "Briefni dizaynerga yuboring",
-    tg_btn: "Telegramga yuborish",
-    tg_note: "Telegram ochiladi — «Yuborish»ni bosing",
+    tg_btn: "Dizayner bilan chatni ochish",
+    tg_note: "Matnni chatga joylang va yuborishni bosing",
     hint: "Tanlash uchun bosing · Pinterest misollarni ochadi",
     pin: "Misollar →",
     sel: "Tanlang",
-    header: "📋 BRIEF",
+    header: "📋 DESIGN BRIEF",
     steps: ["Tanishuv", "Ob'ekt", "Uslub", "Istaklar", "Byudjet"],
     subtitles: [
       "O'zingiz haqingizda",
@@ -516,7 +516,7 @@ function hi(id, type, val) {
   if (type === "phone") {
     val = formatPhone(val);
   } else if (id === "area") {
-    val = val.replace(/\D/g, ""); // Faqat raqamlarni qoldirish (harflarni o'chiradi)
+    val = val.replace(/\D/g, "");
   }
 
   answers[id] = val;
@@ -541,34 +541,27 @@ function goBack() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
+// 📌 Ultra-ixcham matn generatsiyasi (Telefon cheklovlaridan o'tish uchun)
 function buildText() {
   const L = T[lang];
   let lines = [`${L.header}`];
 
-  STEPS.forEach((s, si) => {
-    let stepHasAnswers = false;
-    let stepLines = [];
-
+  STEPS.forEach((s) => {
     s.questions.forEach((q) => {
       const v = getVal(q, answers[q.id]);
       if (v) {
-        stepHasAnswers = true;
-        stepLines.push(`• ${q.label[lang]}: ${v}`);
+        // Ortiqcha "Имя:", "Телефон:" so'zlarisiz faqat qisqa belgi bilan yozadi
+        lines.push(`• ${q.label[lang]}: ${v}`);
       }
     });
-
-    if (stepHasAnswers) {
-      lines.push(`\n[${T[lang].steps[si].toUpperCase()}]`);
-      lines = lines.concat(stepLines);
-    }
   });
 
   return lines.join("\n");
 }
 
 function sendTG() {
-  // 🔥 Telefon ilovalarida matn chiqishi uchun tuzatilgan 100% universal va xavfsiz format:
-  const tgUrl = `https://t.me/share/url?url=https://t.me/${TG}&text=${encodeURIComponent(buildText())}`;
+  // ⚡️ To'g'ridan-to'g'ri faqat sizning profilingiz ochiladi va ixcham matn pastga tushadi
+  const tgUrl = `https://t.me/${TG}?text=${encodeURIComponent(buildText())}`;
   window.open(tgUrl, "_blank");
 }
 
