@@ -1,4 +1,4 @@
-const TG = "uz_702"; // ⚠️ Bu yerga o'zingizning telegram username'ingizni yozing
+const TG = "uz_702"; // ⚠️ Telegram username (boshida @ belgisiz)
 let lang = "ru",
   step = 0,
   answers = {};
@@ -516,7 +516,7 @@ function hi(id, type, val) {
   if (type === "phone") {
     val = formatPhone(val);
   } else if (id === "area") {
-    val = val.replace(/\D/g, ""); // Faqat raqamlarni qoldirish
+    val = val.replace(/\D/g, ""); // Faqat raqamlarni qoldirish (harflarni o'chiradi)
   }
 
   answers[id] = val;
@@ -567,8 +567,8 @@ function buildText() {
 }
 
 function sendTG() {
-  // To'g'ridan-to'g'ri ko'rsatilgan profil chatini ochadi va matnni kiritadi
-  const tgUrl = `https://t.me/${TG}?text=${encodeURIComponent(buildText())}`;
+  // 🔥 Telefon ilovalarida matn chiqishi uchun tuzatilgan 100% universal va xavfsiz format:
+  const tgUrl = `https://t.me/share/url?url=https://t.me/${TG}&text=${encodeURIComponent(buildText())}`;
   window.open(tgUrl, "_blank");
 }
 
